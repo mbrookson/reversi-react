@@ -1,0 +1,43 @@
+$tileWidth: 80px;
+$tilePadding: 1px;
+
+.board {
+  width: $tileWidth * 8;
+  height: $tileWidth * 8;
+  background-color: white;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.tile {
+  background-color: darkgreen;
+  height: $tileWidth - ($tilePadding * 2);
+  width: $tileWidth - ($tilePadding * 2);
+  margin: $tilePadding;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    background-color: lighten(darkgreen, 5%);
+  }
+}
+
+.counter {
+  width: 85%;
+  height: 85%;
+  border-radius: 500px;
+  display: none;
+}
+
+.black {
+  background-color: black;
+  display: block;
+}
+
+.white {
+  background-color: white;
+  display: block;
+}
