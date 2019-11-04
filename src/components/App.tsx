@@ -1,21 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './App.module.scss';
-import { Board } from './board/Board';
-import { Player } from '../game/player';
-import { CurrentPlayer } from './currentPlayer/CurrentPlayer';
+import { Game } from './game/Game';
+import Provider from './StoreProvider';
 
 const App: React.FC = () => {
-  const [turn, setTurn] = useState<Player>(Player.White);
-
   return (
-    <div className={styles.app}>
-      <header>
-        <h1>Othello</h1>
-      </header>
-      <CurrentPlayer player={turn} />
-      <Board currentPlayer={turn} onTurnChange={setTurn} />
-    </div>
+    <Provider>
+      <div className={styles.app}>
+        <header>
+          <h1>Othello</h1>
+        </header>
+        <Game />
+      </div>
+    </Provider>
   );
-}
+};
 
 export default App;

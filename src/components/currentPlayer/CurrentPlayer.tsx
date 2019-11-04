@@ -1,14 +1,12 @@
 import React from 'react';
 import { Player } from '../../game/player';
+import { usePlayerStore } from '../StoreProvider';
 
-interface Props {
-  player: Player;
-}
-
-export const CurrentPlayer: React.FC<Props> = (props) => {
+export const CurrentPlayer: React.FC = () => {
+  const { state } = usePlayerStore();
   return (
-    <h3 style={{color: 'white'}}>
-      {props.player === Player.Black ? 'Black' : 'White'} turn
+    <h3 style={{ color: 'white' }}>
+      {state.currentPlayer === Player.Black ? 'Black' : 'White'} turn
     </h3>
-  )
+  );
 };

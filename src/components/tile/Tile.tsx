@@ -1,6 +1,6 @@
-import React from "react";
-import styles from "../board/Board.module.scss";
-import { Player } from "../../game/player";
+import React from 'react';
+import styles from '../board/Board.module.scss';
+import { Player } from '../../game/player';
 
 export interface TileModel {
   x: number;
@@ -14,7 +14,7 @@ interface Props extends TileModel {
 
 export const Tile: React.FC<Props> = (props: Props) => {
   const { x, y, player, onClick } = props;
-  let counterStyle = "";
+  let counterStyle = '';
 
   switch (player) {
     case Player.Black:
@@ -26,7 +26,11 @@ export const Tile: React.FC<Props> = (props: Props) => {
   }
 
   return (
-    <div key={x + "," + y} className={styles.tile} onClick={() => onClick(props)}>
+    <div
+      key={x + ',' + y}
+      className={styles.tile}
+      onClick={() => onClick(props)}
+    >
       <div className={[styles.counter, counterStyle].join(' ')}></div>
     </div>
   );
