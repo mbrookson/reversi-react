@@ -1,40 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Board.module.scss';
-import { generateTiles, defaultTiles } from '../../game/board';
+import { generateTiles } from '../../game/board';
 import { Tile, TileModel } from '../tile/Tile';
-import { Player } from '../../game/player';
-import { switchPlayer } from '../../actions/currentPlayer';
-import { usePlayerStore } from '../StoreProvider';
+import { usePlayer } from '../../context/PlayerProvider';
 
 export const Board: React.FC = () => {
-  const [tiles, setTiles] = useState<TileModel[][]>(generateTiles());
-  const [blackTiles, setBlackTiles] = useState<TileModel[]>([]);
-  const [whiteTiles, setWhiteTiles] = useState<TileModel[]>([]);
-  const { state, dispatch } = usePlayerStore();
+  const { currentPlayer, toggleCurrentPlayer } = usePlayer();
+  const [tiles, setTiles] = useState<TileModel[][]>([]);
 
   useEffect(() => {
-    setBlackTiles(defaultTiles.filter(t => t.player === Player.Black));
-    setWhiteTiles(defaultTiles.filter(t => t.player === Player.White));
-  }, []);
+    setTiles(generateTiles());
+  }, [setTiles]);
 
   const key = (x: number, y: number) => `${x},${y}`;
 
-  blackTiles.forEach(tile => {
-    tiles[tile.x][tile.y].player = tile.player;
-  });
+  const handleSelectTile = (tile: TileModel) => {
+    if (tile.player !== undefined) return;
 
-  whiteTiles.forEach(tile => {
-    tiles[tile.x][tile.y].player = tile.player;
-  });
+    setTiles([
+      ...tiles.map((row, x) => [
+        ...row.map((t, y) => {
+          const isMatch = tile.x === x && tile.y === y;
+          return { ...t, player: isMatch ? currentPlayer : t.player };
+        })
+      ])
+    ]);
 
-  const selectTile = (tile: TileModel) => {
-    if (!tile.player) {
-      const newTiles = [...tiles];
-      newTiles[tile.x][tile.y].player = state.currentPlayer;
-      setTiles(newTiles);
-    }
-
-    dispatch(switchPlayer());
+    toggleCurrentPlayer();
   };
 
   return (
@@ -46,7 +38,7 @@ export const Board: React.FC = () => {
             x={x}
             y={tile.y}
             player={tile.player}
-            onClick={tile => selectTile(tile)}
+            onClick={tile => handleSelectTile(tile)}
           />
         ))
       )}

@@ -1,9 +1,5 @@
-import { Player } from '../game/player';
+import { TileModel } from '../components/tile/Tile';
 
-export interface GameState {
-  player: PlayerState;
-}
-
-export interface PlayerState {
-  currentPlayer: Player;
+export interface BoardState {
+  tiles: TileModel[][];
 }

@@ -1,12 +1,13 @@
 import React from 'react';
 import { Player } from '../../game/player';
-import { usePlayerStore } from '../StoreProvider';
+import { usePlayer } from '../../context/PlayerProvider';
 
 export const CurrentPlayer: React.FC = () => {
-  const { state } = usePlayerStore();
+  const { currentPlayer } = usePlayer();
+
   return (
     <h3 style={{ color: 'white' }}>
-      {state.currentPlayer === Player.Black ? 'Black' : 'White'} turn
+      {currentPlayer === Player.Black ? 'Black' : 'White'} turn
     </h3>
   );
 };

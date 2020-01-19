@@ -1,5 +1,5 @@
-import { TileModel } from "../components/tile/Tile";
-import { Player } from "./player";
+import { TileModel } from '../components/tile/Tile';
+import { Player } from './player';
 
 export const generateTiles = () => {
   const width = 8;
@@ -9,15 +9,23 @@ export const generateTiles = () => {
     tiles[x] = [];
     for (let y = 0; y <= width - 1; y++) {
       tiles[x][y] = { x, y };
+
+      const defaultTile = defaultTiles.find(t => t.x === x && t.y === y);
+
+      if (defaultTile) {
+        tiles[x][y].player = defaultTile.player;
+      }
     }
   }
 
   return tiles;
-}
+};
 
 export const defaultTiles: TileModel[] = [
   { x: 3, y: 3, player: Player.Black },
   { x: 4, y: 4, player: Player.Black },
   { x: 3, y: 4, player: Player.White },
-  { x: 4, y: 3, player: Player.White },
+  { x: 4, y: 3, player: Player.White }
 ];
+
+// export const canPlace =

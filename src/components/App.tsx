@@ -1,18 +1,18 @@
 import React from 'react';
 import styles from './App.module.scss';
 import { Game } from './game/Game';
-import Provider from './StoreProvider';
+import { PlayerProvider } from '../context/PlayerProvider';
 
 const App: React.FC = () => {
   return (
-    <Provider>
+    <PlayerProvider>
       <div className={styles.app}>
         <header>
           <h1>Othello</h1>
         </header>
         <Game />
       </div>
-    </Provider>
+    </PlayerProvider>
   );
 };
 
