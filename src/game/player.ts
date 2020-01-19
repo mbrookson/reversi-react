@@ -1,6 +1,6 @@
 export enum Player {
-  Black,
-  White
+  Black = 1,
+  White = 2
 }
 
 export interface PlayerState {
