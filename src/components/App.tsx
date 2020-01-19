@@ -1,18 +1,20 @@
 import React from 'react';
-import styles from './App.module.scss';
 import { Game } from './game/Game';
 import { PlayerProvider } from '../context/PlayerProvider';
+import { MessageProvider } from '../context/MessageProvider';
 
 const App: React.FC = () => {
   return (
-    <PlayerProvider>
-      <div className={styles.app}>
-        <header>
-          <h1>Reversi</h1>
-        </header>
-        <Game />
-      </div>
-    </PlayerProvider>
+    <MessageProvider>
+      <PlayerProvider>
+        <div className="bg-gray-800 flex flex-col align-middle justify-center min-h-screen text-white text-center">
+          <header>
+            <h1 className="text-5xl mb-8">Reversi</h1>
+          </header>
+          <Game />
+        </div>
+      </PlayerProvider>
+    </MessageProvider>
   );
 };
 

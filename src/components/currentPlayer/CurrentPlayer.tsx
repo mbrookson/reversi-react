@@ -6,7 +6,7 @@ export const CurrentPlayer: React.FC = () => {
   const { currentPlayer } = usePlayer();
 
   return (
-    <h3 style={{ color: 'white' }}>
+    <h3 className="font-bold text-xl">
       {currentPlayer === Player.Black ? 'Black' : 'White'} turn
     </h3>
   );

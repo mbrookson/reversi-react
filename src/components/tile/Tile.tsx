@@ -28,7 +28,7 @@ export const Tile: React.FC<Props> = (props: Props) => {
   return (
     <div
       key={x + ',' + y}
-      className={`${styles.tile} x-${x} y-${y}`}
+      className={`${styles.tile} x-${x} y-${y} bg-green-700 hover:bg-green-800 cursor-pointer`}
       onClick={() => onClick(props)}
     >
       <div className={[styles.counter, counterStyle].join(' ')}></div>

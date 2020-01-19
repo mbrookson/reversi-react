@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Board.module.scss';
-import { generateTiles, immutableMapTiles } from '../../game/board';
+import {
+  generateTiles,
+  immutableMapTiles,
+  analyseTilesToBeFlipped
+} from '../../game/board';
 import { Tile, TileModel } from '../tile/Tile';
 import { usePlayer } from '../../context/PlayerProvider';
-import { analyseTilesToBeFlipped } from '../../game/board';
+import { useMessages } from '../../context/MessageProvider';
 
 export const Board: React.FC = () => {
   const { currentPlayer, toggleCurrentPlayer } = usePlayer();
+  const { setMessage } = useMessages();
   const [tiles, setTiles] = useState<TileModel[][]>([]);
 
   useEffect(() => {
@@ -16,7 +21,10 @@ export const Board: React.FC = () => {
   const key = (x: number, y: number) => `${x},${y}`;
 
   const handleSelectTile = (selectedTile: TileModel) => {
-    if (selectedTile.player) return;
+    if (selectedTile.player) {
+      setMessage('Counter already placed here.');
+      return;
+    }
 
     const tilesToFlip = analyseTilesToBeFlipped(
       currentPlayer,
@@ -24,7 +32,11 @@ export const Board: React.FC = () => {
       tiles
     );
 
-    console.log(tilesToFlip);
+    if (tilesToFlip.length === 1) {
+      setMessage('Counter must be places adjacent to another counter.');
+      return;
+    }
+
     const newTiles = immutableMapTiles(tiles, tile => {
       if (tilesToFlip.find(t => t.x === tile.x && t.y === tile.y)) {
         tile.player = currentPlayer;
@@ -38,7 +50,7 @@ export const Board: React.FC = () => {
   };
 
   return (
-    <div className={styles.board}>
+    <div className={[styles.board, 'rounded'].join(' ')}>
       {tiles.map(rows =>
         rows.map(tile => (
           <Tile

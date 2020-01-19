@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "react-scripts start && prettier-watch",
-    "build": "react-scripts build",
+    "start": "npm run tailwind:css && react-scripts start && prettier-watch",
+    "build": "rnpm run tailwind:css && eact-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prettier-watch": "onchange '**/*.js' '**/*.ts' -e 'dist/**/**' 'node_modules/**/*' -- prettier --write {{changed}}"
+    "prettier-watch": "onchange '**/*.js' '**/*.ts' -e 'dist/**/**' 'node_modules/**/*' -- prettier --write {{changed}}",
+    "tailwind:css": "tailwind build src/tailwind.css -c tailwind.config.js -o src/index.css"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -28,7 +29,8 @@
     "node-sass": "^4.13.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
-    "react-scripts": "^3.3.0"
+    "react-scripts": "^3.3.0",
+    "tailwindcss": "^1.2.0-canary.5"
   },
   "devDependencies": {
     "@types/jest": "24.0.21",

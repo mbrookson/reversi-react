@@ -1,28 +1,28 @@
 $tileWidth: 70px;
 $tilePadding: 1px;
+$boardPadding: 5px;
+$shadow: 4px 2px 6px #333;
 
 .board {
-  width: $tileWidth * 8;
-  height: $tileWidth * 8;
+  width: ($tileWidth * 8) + ($tilePadding * 8) + $boardPadding;
+  height: ($tileWidth * 8) + ($tilePadding * 8) + $boardPadding;
   background-color: white;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  margin: 0 auto;
+  padding: $boardPadding;
+  box-shadow: $shadow;
 }
 
 .tile {
-  background-color: darkgreen;
   height: $tileWidth - ($tilePadding * 2);
   width: $tileWidth - ($tilePadding * 2);
   margin: $tilePadding;
   display: flex;
-  justify-content: center;
   align-items: center;
-
-  &:hover {
-    background-color: lighten(darkgreen, 5%);
-  }
+  justify-content: center;
 }
 
 .counter {
@@ -30,7 +30,7 @@ $tilePadding: 1px;
   height: 85%;
   border-radius: 500px;
   display: none;
-  box-shadow: 4px 2px 6px #333;
+  box-shadow: $shadow;
 }
 
 .black {
