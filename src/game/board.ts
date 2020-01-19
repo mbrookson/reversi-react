@@ -89,7 +89,12 @@ export const analyseTilesToBeFlipped = (
     let cache: TileModel[] = [];
     while (condition()) {
       let tile = tiles[y][x];
-      if (tile.player && tile.player !== currentPlayer) {
+      if (
+        !tile.player &&
+        (tile.x !== selectedTile.x || tile.y !== selectedTile.y)
+      ) {
+        break;
+      } else if (tile.player && tile.player !== currentPlayer) {
         cache.push(tile);
       } else if (tile.player && tile.player === currentPlayer) {
         tilesToFlip = tilesToFlip.concat(cache);
