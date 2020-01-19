@@ -8,7 +8,7 @@ const App: React.FC = () => {
     <PlayerProvider>
       <div className={styles.app}>
         <header>
-          <h1>Othello</h1>
+          <h1>Reversi</h1>
         </header>
         <Game />
       </div>
