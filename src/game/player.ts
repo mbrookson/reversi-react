@@ -6,4 +6,6 @@ export enum Player {
 export interface PlayerState {
   currentPlayer: Player;
   toggleCurrentPlayer: () => void;
+  winner?: Player;
+  setWinner: (player?: Player) => void;
 }

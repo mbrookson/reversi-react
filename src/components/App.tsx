@@ -9,7 +9,7 @@ const App: React.FC = () => {
       <PlayerProvider>
         <div className="bg-gray-800 flex flex-col align-middle justify-center min-h-screen text-white text-center">
           <header>
-            <h1 className="text-5xl mb-8">Reversi</h1>
+            <h1 className="text-5xl font-bold mb-8">Reversi</h1>
           </header>
           <Game />
         </div>
