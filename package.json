@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "npm run tailwind:css && react-scripts start && prettier-watch",
-    "build": "rnpm run tailwind:css && eact-scripts build",
+    "build": "npm run tailwind:css && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prettier-watch": "onchange '**/*.js' '**/*.ts' -e 'dist/**/**' 'node_modules/**/*' -- prettier --write {{changed}}",
