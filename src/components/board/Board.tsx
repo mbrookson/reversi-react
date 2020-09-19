@@ -3,7 +3,7 @@ import styles from './Board.module.scss';
 import {
   generateTiles,
   immutableMapTiles,
-  analyseTilesToBeFlipped
+  analyseTilesToBeFlipped,
 } from '../../game/board';
 import { Tile, TileModel } from '../tile/Tile';
 import { usePlayer } from '../../context/PlayerProvider';
@@ -37,8 +37,8 @@ export const Board: React.FC = () => {
       return;
     }
 
-    const newTiles = immutableMapTiles(tiles, tile => {
-      if (tilesToFlip.find(t => t.x === tile.x && t.y === tile.y)) {
+    const newTiles = immutableMapTiles(tiles, (tile) => {
+      if (tilesToFlip.find((t) => t.x === tile.x && t.y === tile.y)) {
         tile.player = currentPlayer;
       }
       return tile;
@@ -51,14 +51,14 @@ export const Board: React.FC = () => {
 
   return (
     <div className={[styles.board, 'rounded'].join(' ')}>
-      {tiles.map(rows =>
-        rows.map(tile => (
+      {tiles.map((rows) =>
+        rows.map((tile) => (
           <Tile
             key={key(tile.x, tile.y)}
             x={tile.x}
             y={tile.y}
             player={tile.player}
-            onClick={tile => handleSelectTile(tile)}
+            onClick={(tile) => handleSelectTile(tile)}
           />
         ))
       )}
