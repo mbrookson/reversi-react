@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from '../board/Board.module.scss';
 import { Player } from '../../game/player';
 
 export interface TileModel {
@@ -18,20 +17,25 @@ export const Tile: React.FC<Props> = (props: Props) => {
 
   switch (player) {
     case Player.Black:
-      counterStyle = styles.black;
+      counterStyle = 'block bg-black';
       break;
     case Player.White:
-      counterStyle = styles.white;
+      counterStyle = 'block bg-white';
       break;
+    default:
+      counterStyle = 'hidden';
   }
 
   return (
     <div
       key={x + ',' + y}
-      className={`${styles.tile} x-${x} y-${y} bg-green-700 hover:bg-green-800 cursor-pointer`}
+      className={`x-${x} y-${y} flex items-center justify-center bg-green-700 hover:bg-green-800 cursor-pointer`}
       onClick={() => onClick(props)}
     >
-      <div className={[styles.counter, counterStyle].join(' ')}></div>
+      <div
+        style={{ width: '90%', height: '90%' }}
+        className={`rounded-full shadow-lg block ${counterStyle}`}
+      ></div>
     </div>
   );
 };

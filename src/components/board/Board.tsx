@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import styles from './Board.module.scss';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   generateTiles,
   immutableMapTiles,
@@ -13,6 +12,9 @@ export const Board: React.FC = () => {
   const { currentPlayer, toggleCurrentPlayer } = usePlayer();
   const { setMessage } = useMessages();
   const [tiles, setTiles] = useState<TileModel[][]>([]);
+  const board = useRef<HTMLDivElement>(null);
+
+  let height = board && board.current ? board.current.offsetWidth : 0;
 
   useEffect(() => {
     setTiles(generateTiles());
@@ -50,7 +52,11 @@ export const Board: React.FC = () => {
   };
 
   return (
-    <div className={[styles.board, 'rounded'].join(' ')}>
+    <div
+      ref={board}
+      style={{ height }}
+      className="grid grid-cols-8 grid-rows-8 gap-1 bg-white border-4 border-white w-5/6 md:w-1/3 mx-auto rounded"
+    >
       {tiles.map((rows) =>
         rows.map((tile) => (
           <Tile
@@ -58,7 +64,7 @@ export const Board: React.FC = () => {
             x={tile.x}
             y={tile.y}
             player={tile.player}
-            onClick={(tile) => handleSelectTile(tile)}
+            onClick={handleSelectTile}
           />
         ))
       )}

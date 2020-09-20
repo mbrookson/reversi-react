@@ -8,7 +8,7 @@ import Winner from '../winner/Winner';
 enum Mode {
   StartMenu,
   GameEndMenu,
-  Game
+  Game,
 }
 
 export const Game: React.FC = () => {
@@ -42,7 +42,7 @@ export const Game: React.FC = () => {
       ) : (
         <>
           <CurrentPlayer />
-          <Message></Message>
+          <Message />
           <Board />
         </>
       )}
