@@ -27,7 +27,7 @@
     "autoprefixer": "^10.0.0",
     "easytimer.js": "^4.1.1",
     "next": "^9.5.3",
-    "postcss": "^7.0.32",
+    "postcss": "^8.2.10",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-scripts": "^3.3.0",
