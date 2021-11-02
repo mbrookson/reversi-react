@@ -2,11 +2,12 @@ import React, { useEffect } from 'react';
 import { Player } from '../../game/player';
 import { usePlayer } from '../../context/PlayerProvider';
 import useTimer from '../../hooks/timer';
+import { playerTimerMinutes } from '../../game/config';
 
 export const CurrentPlayer: React.FC = () => {
   const { currentPlayer, setWinner } = usePlayer();
-  const blackTimer = useTimer(5);
-  const whiteTimer = useTimer(5);
+  const blackTimer = useTimer(playerTimerMinutes);
+  const whiteTimer = useTimer(playerTimerMinutes);
 
   useEffect(() => {
     if (currentPlayer === Player.Black) {

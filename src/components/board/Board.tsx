@@ -3,13 +3,20 @@ import {
   generateTiles,
   immutableMapTiles,
   analyseTilesToBeFlipped,
+  canTileBePlaced,
 } from '../../game/board';
 import { Tile, TileModel } from '../tile/Tile';
 import { usePlayer } from '../../context/PlayerProvider';
 import { useMessages } from '../../context/MessageProvider';
+import { boardWidth } from '../../game/config';
 
 export const Board: React.FC = () => {
-  const { currentPlayer, toggleCurrentPlayer } = usePlayer();
+  const {
+    currentPlayer,
+    otherPlayer,
+    setWinner,
+    toggleCurrentPlayer,
+  } = usePlayer();
   const { setMessage } = useMessages();
   const [tiles, setTiles] = useState<TileModel[][]>([]);
   const board = useRef<HTMLDivElement>(null);
@@ -19,6 +26,12 @@ export const Board: React.FC = () => {
   useEffect(() => {
     setTiles(generateTiles());
   }, [setTiles]);
+
+  useEffect(() => {
+    if (tiles.length && !canTileBePlaced(currentPlayer, tiles)) {
+      setWinner(otherPlayer);
+    }
+  }, [currentPlayer, otherPlayer, setWinner, tiles]);
 
   const key = (x: number, y: number) => `${x},${y}`;
 
@@ -35,6 +48,7 @@ export const Board: React.FC = () => {
     );
 
     if (tilesToFlip.length === 1) {
+      // Only the selected tile could be placed.
       setMessage('Counter must be places adjacent to another counter.');
       return;
     }
@@ -55,7 +69,7 @@ export const Board: React.FC = () => {
     <div
       ref={board}
       style={{ height }}
-      className="grid grid-cols-8 grid-rows-8 gap-1 bg-white border-4 border-white w-5/6 md:w-1/3 mx-auto rounded"
+      className={`grid grid-cols-${boardWidth} grid-rows-${boardWidth} gap-1 bg-white border-4 border-white w-5/6 md:w-1/2 lg:w-1/3 mx-auto rounded`}
     >
       {tiles.map((rows) =>
         rows.map((tile) => (
